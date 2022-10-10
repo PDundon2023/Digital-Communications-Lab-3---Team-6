@@ -1,0 +1,64 @@
+String encodeStr() {
+  int i = 0, j = 0;
+  char buffer;
+  String cipher;
+  while (i < inputLength) {
+    if (isWhitespace(inputStr[i])) {
+      i++;
+    }
+    else if (!isAlpha(inputStr[i])) {
+      Serial.write(inputStr[i]);
+      i++;
+    }
+    else {
+      input = inputStr[i];
+      keyword = keyStr[j];
+      output = (((input - 65) + (keyword - 65)));
+      if (output > 25) {
+        output = output + 39;
+      }
+      else {
+        output = output + 65;
+      }
+      //Serial.write(output);
+      buffer = output;
+      cipher.concat(buffer);
+      i++;
+      j++;
+    }
+  }
+  return(cipher);
+
+}
+
+String decodeStr() {
+  int i = 0, j = 0;
+  char buffer;
+  String Keyword;
+  while (i < inputLength) {
+    if (isWhitespace(inputStr[i])) {
+      i++;
+    }
+    else if (!isAlpha(inputStr[i])) {
+      Serial.write(inputStr[i]);
+      i++;
+    }
+    else {
+      input = inputStr[i];
+      keyword = keyStr[j];
+      output = (((input - 65) - (keyword - 65)));
+      if (output < 0) {
+        output = output + 91;
+      }
+      else {
+        output = output + 65;
+      }
+      // Serial.write(output);
+      buffer = output;
+      Keyword.concat(buffer);
+      i++;
+      j++;
+    }
+  }
+  return(Keyword);
+}
